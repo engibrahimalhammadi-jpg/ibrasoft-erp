@@ -11,10 +11,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository Code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Build Android APK and AAB Packages
-        uses: pwa-builder/pwa-android-action@v1.0.1
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          pwa-url: "https://engibrahimalhammadi-jpg.github.io/ibrasoft-erp/"
+          node-version: '20'
+
+      - name: Install and Build PWA
+        run: |
+          npm install -g @pwabuilder/pwabuilder-cli
+          pwabuilder package --copy --platforms android --url "https://engibrahimalhammadi-jpg.github.io/ibrasoft-erp/" --output ./output
+          
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: IbraSoft-ERP-APK
+          path: ./output/android/
