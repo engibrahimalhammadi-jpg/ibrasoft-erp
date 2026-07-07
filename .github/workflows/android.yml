@@ -15,6 +15,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Android APK and AAB Packages
-        uses: pwa-builder/pwa-android-action@main
+        uses: pwa-builder/pwa-android-action@v1
         with:
           pwa-url: "https://engibrahimalhammadi-jpg.github.io/ibrasoft-erp/"
